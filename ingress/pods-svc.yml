@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-app1
+  labels:
+    app: app1
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      command: ["/bin/sh", "-c"]
+      args:
+        - echo "<html><body><h1>Hello from app1</h1></body></html>" > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-service
+spec:
+  selector:
+    app: app1
+  ports:
+    - port: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-app2
+  labels:
+    app: app2
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      command: ["/bin/sh", "-c"]
+      args:
+        - echo "<html><body><h1>Hello from app2</h1></body></html>" > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app2-service
+spec:
+  selector:
+    app: app2
+  ports:
+    - port: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-app3
+  labels:
+    app: app3
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      command: ["/bin/sh", "-c"]
+      args:
+        - echo "<html><body><h1>Hello from app3</h1></body></html>" > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app3-service
+spec:
+  selector:
+    app: app3
+  ports:
+    - port: 80
